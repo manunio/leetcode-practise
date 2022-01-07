@@ -1,5 +1,5 @@
-use std::vec;
 use std::collections::HashMap;
+use std::vec;
 
 mod tests;
 
@@ -34,7 +34,6 @@ impl Solution {
         answer
     }
 
-
     pub fn final_value_after_operations(operations: Vec<String>) -> i32 {
         let mut ans = 0;
 
@@ -42,7 +41,7 @@ impl Solution {
             match operation.as_str() {
                 "++X" | "X++" => ans += 1,
                 "--X" | "X--" => ans -= 1,
-                x => panic!("unknown operation {}", x)
+                x => panic!("unknown operation {}", x),
             }
         }
 
@@ -85,7 +84,9 @@ impl Solution {
                 words_count += 1;
             }
 
-            if words_count > max { max = words_count; }
+            if words_count > max {
+                max = words_count;
+            }
         }
 
         max
@@ -104,13 +105,12 @@ impl Solution {
     }
 
     pub fn shuffle_with_fold(nums: Vec<i32>, n: i32) -> Vec<i32> {
-        (0..n as usize)
-            .fold(Vec::new(), |mut acc, i| {
-                acc.push(nums[i]);
-                acc.push(nums[i + (n as usize)]);
+        (0..n as usize).fold(Vec::new(), |mut acc, i| {
+            acc.push(nums[i]);
+            acc.push(nums[i + (n as usize)]);
 
-                acc
-            })
+            acc
+        })
     }
 
     pub fn maximum_wealth(accounts: Vec<Vec<i32>>) -> i32 {
@@ -195,13 +195,15 @@ impl Solution {
     //Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
     // Output: "leetcode"
     pub fn restore_string(s: String, indices: Vec<i32>) -> String {
-        let mut restored_string = String::new();
+        let mut v = Vec::<char>::new();
+        v.resize(s.len(), 'a');
 
-        for i in 0..indices.len() {
-            // println!("{} {}", i, s.chars().nth(indices[i] as usize).unwrap());
-            println!("{} {} {} {}", i, indices[i], s.as_bytes()[i as usize] as char, s.as_bytes()[indices[i] as usize] as char);
-            restored_string.push(s.chars().nth(indices[i] as usize).unwrap());
+        for (i, iter) in indices.iter().enumerate() {
+            v[*iter as usize] = s.chars().nth(i).unwrap();
         }
-        restored_string
+
+        let r = v.iter().collect();
+
+        return r;
     }
 }
