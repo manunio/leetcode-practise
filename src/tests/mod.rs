@@ -120,7 +120,9 @@ mod tests {
 
     #[test]
     fn test_decompress_rl_elist() {
-        let nums = vec![1,2,3,4];
+        let mut nums = vec![1,2,3,4];
         assert_eq!(vec![2,4,4,4],Solution::decompress_rl_elist(nums));
+        nums = vec![1,2,3,4];
+        assert_eq!(vec![2,4,4,4],Solution::decompress_rl_elist_1(nums));
     }
 }

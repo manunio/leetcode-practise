@@ -226,13 +226,26 @@ impl Solution {
     pub fn decompress_rl_elist(nums: Vec<i32>) -> Vec<i32> {
         let mut res = Vec::<i32>::new();
 
-        for i in 0..nums.len() {
-            if i < nums.len() && 2 * i + 1 < nums.len() {
-                let freq = nums[2 * i];
-                let val = nums[2 * i + 1];
-                for _ in 0..freq {
-                    res.push(val);
-                }
+        for i in (0..nums.len()).step_by(2) {
+            let freq = nums[i];
+            let val = nums[i + 1];
+            for _ in 0..freq {
+                res.push(val);
+            }
+        }
+
+        res
+    }
+
+    // https://leetcode.com/problems/decompress-run-length-encoded-list/
+    // Input: nums = [1,2,3,4]
+    // Output: [2,4,4,4]
+    pub fn decompress_rl_elist_1(nums: Vec<i32>) -> Vec<i32> {
+        let mut res = Vec::<i32>::new();
+
+        for i in (0..nums.len()).step_by(2) {
+            for _ in 0..nums[i] {
+                res.push(nums[i + 1]);
             }
         }
 
