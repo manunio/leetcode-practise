@@ -117,4 +117,10 @@ mod tests {
         let encoded = vec![1,2,3]; let first = 1;
         assert_eq!(vec![1,0,2,1], Solution::decode(encoded, first))
     }
+
+    #[test]
+    fn test_decompress_rl_elist() {
+        let nums = vec![1,2,3,4];
+        assert_eq!(vec![2,4,4,4],Solution::decompress_rl_elist(nums));
+    }
 }

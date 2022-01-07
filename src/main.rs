@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use std::collections::HashMap;
 use std::vec;
 
@@ -216,6 +218,24 @@ impl Solution {
         }
 
         res
-    } 
+    }
 
+    // https://leetcode.com/problems/decompress-run-length-encoded-list/
+    // Input: nums = [1,2,3,4]
+    // Output: [2,4,4,4]
+    pub fn decompress_rl_elist(nums: Vec<i32>) -> Vec<i32> {
+        let mut res = Vec::<i32>::new();
+
+        for i in 0..nums.len() {
+            if i < nums.len() && 2 * i + 1 < nums.len() {
+                let freq = nums[2 * i];
+                let val = nums[2 * i + 1];
+                for _ in 0..freq {
+                    res.push(val);
+                }
+            }
+        }
+
+        res
+    }
 }
