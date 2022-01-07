@@ -195,15 +195,12 @@ impl Solution {
     //Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
     // Output: "leetcode"
     pub fn restore_string(s: String, indices: Vec<i32>) -> String {
-        let mut v = Vec::<char>::new();
-        v.resize(s.len(), 'a');
+        let mut restored_string = vec![' '; indices.len()];
 
-        for (i, iter) in indices.iter().enumerate() {
-            v[*iter as usize] = s.chars().nth(i).unwrap();
+        for (i, &x) in indices.iter().enumerate() {
+            restored_string[x as usize] = s.as_bytes()[i] as char;
         }
 
-        let r = v.iter().collect();
-
-        return r;
+        restored_string.iter().collect::<String>()
     }
 }
