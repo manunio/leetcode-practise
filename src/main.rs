@@ -192,7 +192,7 @@ impl Solution {
     }
 
     // https://leetcode.com/problems/shuffle-string/
-    //Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+    // Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
     // Output: "leetcode"
     pub fn restore_string(s: String, indices: Vec<i32>) -> String {
         let mut restored_string = vec![' '; indices.len()];
@@ -203,4 +203,19 @@ impl Solution {
 
         restored_string.iter().collect::<String>()
     }
+
+    // https://leetcode.com/problems/decode-xored-array/
+    // Input: encoded = [1,2,3], first = 1
+    // Output: [1,0,2,1]
+    pub fn decode(encoded: Vec<i32>, first: i32) -> Vec<i32> {
+        let mut res: Vec<i32> = Vec::new();
+        res.push(first);
+
+        for i in 0..encoded.len() {
+            res.push(res[i] ^ encoded[i])
+        }
+
+        res
+    } 
+
 }

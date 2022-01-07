@@ -111,4 +111,10 @@ mod tests {
         let indices = vec![4, 5, 6, 7, 0, 2, 1, 3];
         assert_eq!("leetcode".to_string(), Solution::restore_string(s,indices));
     }
+
+    #[test]
+    fn test_decode() {
+        let encoded = vec![1,2,3]; let first = 1;
+        assert_eq!(vec![1,0,2,1], Solution::decode(encoded, first))
+    }
 }
