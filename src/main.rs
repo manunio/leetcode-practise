@@ -1,5 +1,7 @@
-use core::num;
 use std::vec;
+use std::collections::HashMap;
+
+mod tests;
 
 fn main() {
     println!("Leetcode practise session");
@@ -88,72 +90,118 @@ impl Solution {
 
         max
     }
-}
 
-#[cfg(test)]
-mod tests {
-    use crate::Solution;
+    // [2,5,1,3,4,7], n = 3 ->  [2,3,5,4,1,7]
+    pub fn shuffle(nums: Vec<i32>, n: i32) -> Vec<i32> {
+        let mut ans = Vec::with_capacity(nums.len());
 
-    #[test]
-    fn test_build_array() {
-        let nums = vec![0, 2, 1, 5, 3, 4];
-        let required = vec![0, 1, 2, 4, 5, 3];
-        let expected = Solution::build_array(nums);
-        assert_eq!(required, expected);
+        for i in 0..(nums.len() / 2) {
+            ans.push(nums[i]);
+            ans.push(nums[i + n as usize]);
+        }
+
+        ans
     }
 
-    #[test]
-    fn test_get_concatination() {
-        let nums = vec![1, 2, 1];
-        assert_eq!(vec![1, 2, 1, 1, 2, 1], Solution::get_concatenation(nums));
+    pub fn shuffle_with_fold(nums: Vec<i32>, n: i32) -> Vec<i32> {
+        (0..n as usize)
+            .fold(Vec::new(), |mut acc, i| {
+                acc.push(nums[i]);
+                acc.push(nums[i + (n as usize)]);
+
+                acc
+            })
     }
 
-    #[test]
-    fn test_final_value_after_operations() {
-        let operations = vec![
-            "--X".to_string(),
-            "X++".to_string(),
-            "X++".to_string()
-        ];
-        assert_eq!(1, Solution::final_value_after_operations(operations));
+    pub fn maximum_wealth(accounts: Vec<Vec<i32>>) -> i32 {
+        let mut max = 0;
+        for customers in accounts {
+            let mut wealth = 0;
+            for customer_wealth in customers {
+                wealth += customer_wealth;
+                if wealth > max {
+                    max = wealth
+                }
+            }
+        }
+
+        max
     }
 
-    #[test]
-    fn test_final_value_after_operations_2() {
-        let operations = vec![
-            "--X".to_string(),
-            "X++".to_string(),
-            "X++".to_string()
-        ];
-        assert_eq!(1, Solution::final_value_after_operations_2(operations));
+    pub fn kids_with_candies(candies: Vec<i32>, extra_candies: i32) -> Vec<bool> {
+        let mut res: Vec<bool> = Vec::new();
+
+        let max_candies = candies.iter().max().unwrap();
+
+        for v in candies.iter() {
+            if v + extra_candies >= *max_candies {
+                res.push(true);
+            } else {
+                res.push(false);
+            }
+        }
+
+        res
     }
 
-    #[test]
-    fn test_running_sum() {
-        let nums = vec![1, 2, 3, 4];
-        assert_eq!(vec![1, 3, 6, 10], Solution::running_sum(nums));
+    // https://leetcode.com/problems/number-of-good-pairs/
+    // [1, 2, 3, 1, 1, 3] -> 4
+    pub fn num_identical_pairs(nums: Vec<i32>) -> i32 {
+        let mut pairs = 0;
+
+        for i in 0..nums.len() {
+            for j in i + 1..nums.len() {
+                if nums[i] == nums[j] {
+                    pairs += 1;
+                }
+            }
+        }
+
+        pairs
     }
 
-    #[test]
-    fn test_most_words_found() {
-        let mut sentences = vec![
-            "alice and bob love leetcode".to_string(),
-            "i think so too".to_string(),
-            "this is great thanks very much".to_string()
-        ];
-        assert_eq!(6, Solution::most_words_found(sentences));
+    pub fn num_identical_pairs_1(nums: Vec<i32>) -> i32 {
+        let mut pairs = 0;
+        let mut map = HashMap::new();
 
-        sentences = vec![
-            "w jrpihe zsyqn l dxchifbxlasaehj".to_string(),
-            "nmmfrwyl jscqyxk a xfibiooix xolyqfdspkliyejsnksfewbjom".to_string(),
-            "xnleojowaxwpyogyrayfgyuzhgtdzrsyococuqexggigtberizdzlyrdsfvryiynhg".to_string(),
-            "krpwiazoulcixkkeyogizvicdkbrsiiuhizhkxdpssynfzuigvcbovm".to_string(),
-            "rgmz rgztiup wqnvbucfqcyjivvoeedyxvjsmtqwpqpxmzdupfyfeewxegrlbjtsjkusyektigr".to_string(),
-            "o lgsbechr lqcgfiat pkqdutzrq iveyv iqzgvyddyoqqmqerbmkxlbtmdtkinlk".to_string(),
-            "hrvh efqvjilibdqxjlpmanmogiossjyxepotezo".to_string(),
-            "qstd zui nbbohtuk".to_string(),
-            "qsdrerdzjvhxjqchvuewevyzlkyydpeeblpc".to_string(),
-        ];
-        assert_eq!(6, Solution::most_words_found(sentences));
+        for i in nums {
+            let i_pair = *map.get(&i).unwrap_or(&0);
+            map.insert(i, i_pair + 1);
+            pairs += i_pair;
+        }
+
+        pairs
+    }
+
+    // https://leetcode.com/problems/how-many-numbers-are-smaller-than-the-current-number/
+    // [8,1,2,2,3] -> [4,0,1,1,3]
+    pub fn smaller_numbers_than_current(nums: Vec<i32>) -> Vec<i32> {
+        let mut small_numbers = vec![0; nums.len()];
+
+        for i in 0..nums.len() {
+            let mut count = 0;
+            for j in 0..nums.len() {
+                if i != j && nums[i] > nums[j] {
+                    count += 1;
+                }
+            }
+            small_numbers[i] = count;
+        }
+
+        small_numbers
+    }
+
+    // https://leetcode.com/problems/shuffle-string/
+    //Input: s = "codeleet", indices = [4,5,6,7,0,2,1,3]
+    // Output: "leetcode"
+    pub fn restore_string(s: String, indices: Vec<i32>) -> String {
+        let mut restored_string = String::new();
+
+        for i in 0..indices.len() {
+            // println!("{} {}", i, s.chars().nth(indices[i] as usize).unwrap());
+            println!("{} {} {} {}", i, indices[i], s.as_bytes()[i as usize] as char, s.as_bytes()[indices[i] as usize] as char);
+            restored_string.push(s.chars().nth(indices[i] as usize).unwrap());
+        }
+        restored_string
     }
 }
