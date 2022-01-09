@@ -18,21 +18,13 @@ mod tests {
 
     #[test]
     fn test_final_value_after_operations() {
-        let operations = vec![
-            "--X".to_string(),
-            "X++".to_string(),
-            "X++".to_string()
-        ];
+        let operations = vec!["--X".to_string(), "X++".to_string(), "X++".to_string()];
         assert_eq!(1, Solution::final_value_after_operations(operations));
     }
 
     #[test]
     fn test_final_value_after_operations_2() {
-        let operations = vec![
-            "--X".to_string(),
-            "X++".to_string(),
-            "X++".to_string()
-        ];
+        let operations = vec!["--X".to_string(), "X++".to_string(), "X++".to_string()];
         assert_eq!(1, Solution::final_value_after_operations_2(operations));
     }
 
@@ -47,7 +39,7 @@ mod tests {
         let mut sentences = vec![
             "alice and bob love leetcode".to_string(),
             "i think so too".to_string(),
-            "this is great thanks very much".to_string()
+            "this is great thanks very much".to_string(),
         ];
         assert_eq!(6, Solution::most_words_found(sentences));
 
@@ -56,7 +48,8 @@ mod tests {
             "nmmfrwyl jscqyxk a xfibiooix xolyqfdspkliyejsnksfewbjom".to_string(),
             "xnleojowaxwpyogyrayfgyuzhgtdzrsyococuqexggigtberizdzlyrdsfvryiynhg".to_string(),
             "krpwiazoulcixkkeyogizvicdkbrsiiuhizhkxdpssynfzuigvcbovm".to_string(),
-            "rgmz rgztiup wqnvbucfqcyjivvoeedyxvjsmtqwpqpxmzdupfyfeewxegrlbjtsjkusyektigr".to_string(),
+            "rgmz rgztiup wqnvbucfqcyjivvoeedyxvjsmtqwpqpxmzdupfyfeewxegrlbjtsjkusyektigr"
+                .to_string(),
             "o lgsbechr lqcgfiat pkqdutzrq iveyv iqzgvyddyoqqmqerbmkxlbtmdtkinlk".to_string(),
             "hrvh efqvjilibdqxjlpmanmogiossjyxepotezo".to_string(),
             "qstd zui nbbohtuk".to_string(),
@@ -64,7 +57,6 @@ mod tests {
         ];
         assert_eq!(6, Solution::most_words_found(sentences));
     }
-
 
     #[test]
     fn test_shuffle() {
@@ -77,18 +69,21 @@ mod tests {
 
     #[test]
     fn test_maximum_wealth() {
-        let accounts =
-            vec![ // 0  1  2
-                  vec![1, 2, 3], // customer 0
-                  vec![3, 2, 1]  // customer 1
-            ];
+        let accounts = vec![
+            // 0  1  2
+            vec![1, 2, 3], // customer 0
+            vec![3, 2, 1], // customer 1
+        ];
         assert_eq!(6, Solution::maximum_wealth(accounts));
     }
 
     #[test]
     fn test_kids_with_candies() {
         let candies = vec![2, 3, 5, 1, 3];
-        assert_eq!(vec![true, true, true, false, true], Solution::kids_with_candies(candies, 3));
+        assert_eq!(
+            vec![true, true, true, false, true],
+            Solution::kids_with_candies(candies, 3)
+        );
     }
 
     #[test]
@@ -102,27 +97,41 @@ mod tests {
     #[test]
     fn test_smaller_numbers_than_current() {
         let nums = vec![8, 1, 2, 2, 3];
-        assert_eq!(vec![4, 0, 1, 1, 3], Solution::smaller_numbers_than_current(nums));
+        assert_eq!(
+            vec![4, 0, 1, 1, 3],
+            Solution::smaller_numbers_than_current(nums)
+        );
     }
 
     #[test]
     fn test_restore_string() {
         let s = "codeleet".to_string();
         let indices = vec![4, 5, 6, 7, 0, 2, 1, 3];
-        assert_eq!("leetcode".to_string(), Solution::restore_string(s,indices));
+        assert_eq!("leetcode".to_string(), Solution::restore_string(s, indices));
     }
 
     #[test]
     fn test_decode() {
-        let encoded = vec![1,2,3]; let first = 1;
-        assert_eq!(vec![1,0,2,1], Solution::decode(encoded, first))
+        let encoded = vec![1, 2, 3];
+        let first = 1;
+        assert_eq!(vec![1, 0, 2, 1], Solution::decode(encoded, first))
     }
 
     #[test]
     fn test_decompress_rl_elist() {
-        let mut nums = vec![1,2,3,4];
-        assert_eq!(vec![2,4,4,4],Solution::decompress_rl_elist(nums));
-        nums = vec![1,2,3,4];
-        assert_eq!(vec![2,4,4,4],Solution::decompress_rl_elist_1(nums));
+        let mut nums = vec![1, 2, 3, 4];
+        assert_eq!(vec![2, 4, 4, 4], Solution::decompress_rl_elist(nums));
+        nums = vec![1, 2, 3, 4];
+        assert_eq!(vec![2, 4, 4, 4], Solution::decompress_rl_elist_1(nums));
+    }
+
+    #[test]
+    fn test_create_target_array() {
+        let nums = vec![0, 1, 2, 3, 4];
+        let index = vec![0, 1, 2, 2, 1];
+        assert_eq!(
+            vec![0, 4, 1, 3, 2],
+            Solution::create_target_array(nums, index)
+        );
     }
 }

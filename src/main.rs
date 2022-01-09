@@ -1,5 +1,6 @@
 #![allow(dead_code)]
 
+use core::num;
 use std::collections::HashMap;
 use std::vec;
 
@@ -246,6 +247,21 @@ impl Solution {
         for i in (0..nums.len()).step_by(2) {
             for _ in 0..nums[i] {
                 res.push(nums[i + 1]);
+            }
+        }
+
+        res
+    }
+
+    // https://leetcode.com/problems/create-target-array-in-the-given-order/
+    // Input: nums = [0,1,2,3,4], index = [0,1,2,2,1]
+    // Output: [0,4,1,3,2]
+    pub fn create_target_array(nums: Vec<i32>, index: Vec<i32>) -> Vec<i32> {
+        let mut res:Vec<i32> = vec![0; nums.len()];
+        
+        for &i in nums.iter() {
+            for &j in index.iter() {
+                res[j as usize] = i;
             }
         }
 
