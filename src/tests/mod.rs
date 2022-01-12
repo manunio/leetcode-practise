@@ -127,11 +127,21 @@ mod tests {
 
     #[test]
     fn test_create_target_array() {
-        let nums = vec![0, 1, 2, 3, 4];
-        let index = vec![0, 1, 2, 2, 1];
+        let mut nums = vec![0, 1, 2, 3, 4];
+        let mut index = vec![0, 1, 2, 2, 1];
         assert_eq!(
             vec![0, 4, 1, 3, 2],
             Solution::create_target_array(nums, index)
         );
+
+        nums = vec![2,1,1,7,3];
+        index = vec![0,0,1,0,1];
+
+        assert_eq!(
+            vec![7,3,1,1,2],
+            Solution::create_target_array(nums, index)
+        );
+
+
     }
 }
