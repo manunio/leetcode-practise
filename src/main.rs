@@ -266,4 +266,36 @@ impl Solution {
 
         res
     }
+
+    // https://leetcode.com/problems/count-items-matching-a-rule/'
+    // items[i] = [type, color, name]
+    // Input: items = [["phone","blue","pixel"],["computer","silver","lenovo"],["phone","gold","iphone"]],
+    // ruleKey = "color", ruleValue = "silver"
+    // Output: 1
+    pub fn count_matches(items: Vec<Vec<String>>, rule_key: String, rule_value: String) -> i32 {
+        let mut count = 0;
+
+        for item in items {
+            match rule_key.as_str() {
+                "type" => {
+                    if rule_value == item[0] {
+                        count += 1;
+                    }
+                }
+                "color" => {
+                    if rule_value == item[1] {
+                        count += 1;
+                    }
+                }
+                "name" => {
+                    if rule_value == item[2] {
+                        count += 1;
+                    }
+                }
+                _ => unimplemented!(),
+            }
+        }
+
+        count
+    }
 }

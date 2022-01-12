@@ -142,4 +142,33 @@ mod tests {
             Solution::create_target_array(nums, index)
         );
     }
+
+    #[test]
+    fn test_count_matches() {
+        let mut items = vec![
+            vec!["phone".to_owned(), "blue".to_owned(), "pixel".to_owned()],
+            vec![
+                "computer".to_owned(),
+                "silver".to_owned(),
+                "lenovo".to_owned(),
+            ],
+            vec!["phone".to_owned(), "gold".to_owned(), "iphone".to_owned()],
+        ];
+        let mut rule_key = "color".to_owned();
+        let mut rule_value = "silver".to_owned();
+        assert_eq!(1, Solution::count_matches(items, rule_key, rule_value));
+
+        items = vec![
+            vec!["phone".to_owned(), "blue".to_owned(), "pixel".to_owned()],
+            vec![
+                "computer".to_owned(),
+                "silver".to_owned(),
+                "phone".to_owned(),
+            ],
+            vec!["phone".to_owned(), "gold".to_owned(), "iphone".to_owned()],
+        ];
+        rule_key = "type".to_owned();
+        rule_value = "phone".to_owned();
+        assert_eq!(2, Solution::count_matches(items, rule_key, rule_value))
+    }
 }
