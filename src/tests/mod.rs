@@ -134,14 +134,12 @@ mod tests {
             Solution::create_target_array(nums, index)
         );
 
-        nums = vec![2,1,1,7,3];
-        index = vec![0,0,1,0,1];
+        nums = vec![2, 1, 1, 7, 3];
+        index = vec![0, 0, 1, 0, 1];
 
         assert_eq!(
-            vec![7,3,1,1,2],
+            vec![7, 3, 1, 1, 2],
             Solution::create_target_array(nums, index)
         );
-
-
     }
 }
