@@ -298,4 +298,25 @@ impl Solution {
 
         count
     }
+
+    pub fn count_matches_1(items: Vec<Vec<String>>, rule_key: String, rule_value: String) -> i32 {
+        let mut count = 0;
+
+        let x: &str = &rule_key;
+
+        let i = match x {
+            "type" => 0,
+            "color" => 1,
+            "name" => 2,
+            _ => unimplemented!(),
+        };
+
+        for item in items {
+            if rule_value == item[i] {
+                count += 1;
+            }
+        }
+
+        count
+    }
 }
