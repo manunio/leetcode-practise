@@ -210,8 +210,8 @@ impl Solution {
     // Input: encoded = [1,2,3], first = 1
     // Output: [1,0,2,1]
     pub fn decode(encoded: Vec<i32>, first: i32) -> Vec<i32> {
-        let mut res: Vec<i32> = Vec::new();
-        res.push(first);
+        let mut res: Vec<i32> = vec![first];
+        // res.push(first);
 
         for i in 0..encoded.len() {
             res.push(res[i] ^ encoded[i])
